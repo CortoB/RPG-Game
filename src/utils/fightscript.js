@@ -1,9 +1,5 @@
-import {
-  rdmMonsterStat,
-  monsterStat,
-  rdmMonsterHpStat,
-} from "./src/utils/monsterstat.js"
-import { userStat } from "./src/utils/userstat.js"
+import { rdmMonsterStat, monsterStat, rdmMonsterHpStat } from "./monsterstat.js"
+import { userStat } from "./userstat.js"
 
 const newUserStrBr = userStat.strenght + userStat.brain
 const newMonsterStrgBr = monsterStat.strenght + monsterStat.brain

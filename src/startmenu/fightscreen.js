@@ -1,4 +1,4 @@
-import fightScript from "../../fightscript.js"
+import fightScript from "../utils/fightscript.js"
 import userInputFightScreen from "../utils/inputfightscreen.js"
 
 const fight = async () => {

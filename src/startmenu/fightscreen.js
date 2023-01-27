@@ -1,18 +1,9 @@
-import monsterStat from "../utils/monsterstat.js"
-import { rl } from "../utils/inputmenu.js"
+import fightScript from "../../fightscript.js"
+import userInputFightScreen from "../utils/inputfightscreen.js"
 
-const fight = () => {
-  console.log(`
-    ---Fight---
-
-Monster:
-
-Hp : ${monsterStat.HP}
-Strenght : ${monsterStat.Strenght}
-Brain : ${monsterStat.Brain}
-
-  `)
-  rl.close()
+const fight = async () => {
+  await fightScript()
+  await userInputFightScreen()
 }
 
 export default fight

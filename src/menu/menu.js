@@ -1,4 +1,4 @@
-import userInputMenu, { rl } from "../utils/inputmenu.js"
+import userInputMenu from "../utils/inputmenu.js"
 
 const menu = async () => {
   console.clear()
@@ -10,7 +10,7 @@ const menu = async () => {
 2. Load
 3. Exit
 `)
-  userInputMenu(rl)
+  userInputMenu()
 }
 
 export default menu

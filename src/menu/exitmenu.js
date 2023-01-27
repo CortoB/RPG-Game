@@ -1,6 +1,7 @@
 import { rl } from "../utils/inputmenu.js"
 
 const endMenu = () => {
+  console.clear()
   console.log(`
 ---Game over---
     

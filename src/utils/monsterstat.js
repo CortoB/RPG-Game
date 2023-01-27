@@ -1,16 +1,25 @@
-function rdmMonsterStat() {
-  const min = 45
-  const max = 100
+const rdmMonsterStat = () => {
+  const minStat = 20
+  const maxStat = 30
 
-  const rdmStatMonster = Math.round(Math.random() * (max - min) + min)
+  let rdmStatMonster = Math.round(Math.random() * (maxStat - minStat) + minStat)
 
   return rdmStatMonster
 }
 
-const monsterStat = {
-  hp: rdmMonsterStat(),
+const rdmMonsterHpStat = () => {
+  const minHp = 100
+  const maxHp = 200
+
+  let rdmHpStatMonster = Math.round(Math.random() * (maxHp - minHp) + minHp)
+
+  return rdmHpStatMonster
+}
+
+let monsterStat = {
+  hp: rdmMonsterHpStat(),
   strenght: rdmMonsterStat(),
   brain: rdmMonsterStat(),
 }
 
-export { monsterStat }
+export { monsterStat, rdmMonsterHpStat, rdmMonsterStat }

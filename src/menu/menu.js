@@ -10,7 +10,7 @@ const menu = async () => {
 2. Load
 3. Exit
 `)
-  userInputMenu()
+  await userInputMenu()
 }
 
 export default menu

@@ -1,8 +1,10 @@
 import userInputStartMenu from "../utils/inputstartmenu.js"
 import { userStat } from "../utils/userstat.js"
+import xpToStats from "../utils/xptostats.js"
 
-const startMenu = () => {
+const startMenu = async () => {
   console.clear()
+  xpToStats()
   console.log(
     `
     ---Main Menu---
@@ -13,13 +15,16 @@ Brain : ${userStat.brain}
 Luck : ${userStat.luck}
 Agility : ${userStat.agility} 
 
+Money : ${userStat.money}
+XP : ${userStat.xp}
+
 1. Fight
 2. Shop
 3. Save Game
 4. Exit
 `
   )
-  userInputStartMenu()
+  await userInputStartMenu()
 }
 
 export default startMenu

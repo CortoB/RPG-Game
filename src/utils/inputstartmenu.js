@@ -7,13 +7,18 @@ import { rl } from "./inputmenu.js"
 
 const userInputStartMenu = async () => {
   const userInput = await rl.question("Choose number (1-4) : ")
+  const parsedInput = parseInt(userInput)
 
-  if (parseInt(userInput) === 1) {
-    fight()
+  if (!parsedInput || parsedInput < 1 || parsedInput > 4) {
+    console.log("Enter a number between 1 and 4")
+    await userInputStartMenu()
+  } else if (parseInt(userInput) === 1) {
+    await fight()
   } else if (parseInt(userInput) === 2) {
-    shop()
+    await shop()
   } else if (parseInt(userInput) === 3) {
-    save()
+    console.log("You saved your stats")
+    await save()
   } else if (parseInt(userInput) === 4) {
     endMenu()
   }

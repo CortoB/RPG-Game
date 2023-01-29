@@ -14,12 +14,14 @@ const rdmUserHpStat = () => {
   return rdm
 }
 
-const userStat = {
+let userStat = {
   hp: rdmUserHpStat(),
   strenght: rdmUserStat(),
   brain: rdmUserStat(),
   luck: rdmUserStat(),
   agility: rdmUserStat(),
+  money: 0,
+  xp: 0,
 }
 
 export { userStat }

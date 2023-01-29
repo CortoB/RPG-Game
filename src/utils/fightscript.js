@@ -8,17 +8,6 @@ const MINRDM = 10
 
 const beginingFight = async () => {
   console.clear()
-  let newMonsterStat = {
-    hp: rdmMonsterHpStat(),
-    strenght: rdmMonsterStat(),
-    brain: rdmMonsterStat(),
-  }
-
-  if (monsterStat.hp <= 0) {
-    monsterStat.hp = newMonsterStat.hp
-    monsterStat.strenght = newMonsterStat.strenght
-    monsterStat.brain = newMonsterStat.brain
-  }
 
   console.log(`
   ---Battle---
@@ -37,13 +26,32 @@ const beginingFight = async () => {
 }
 
 const fightScript = async (damageToMonster, rdmDamage, damageToUser) => {
-  await beginingFight()
+  console.clear()
+  const xp = Math.round(Math.random() * (20 - 1) + 1)
+  const money = Math.round(Math.random() * (30 - 5) + 5)
+  const chanceCritical = userStat.luck * 0.2
+  const chanceDodge = userStat.agility * 0.1
+  let newMonsterStat = {
+    hp: rdmMonsterHpStat(),
+    strenght: rdmMonsterStat(),
+    brain: rdmMonsterStat(),
+  }
+
+  if (monsterStat.hp <= 0) {
+    monsterStat.hp = newMonsterStat.hp
+    monsterStat.strenght = newMonsterStat.strenght
+    monsterStat.brain = newMonsterStat.brain
+  }
 
   while (monsterStat.hp > 0 && userStat.hp > 0) {
     for (let i = 1; monsterStat.hp && userStat.hp > 0; i++) {
       rdmDamage = Math.round(Math.random() * (MAXRDM - MINRDM) + MINRDM)
       damageToMonster = newUserStrBr - newMonsterStrgBr + rdmDamage
       damageToUser = monsterStat.strenght + monsterStat.brain - rdmDamage * 2
+      const criticalHit = Math.round(Math.random() * (100 - 1) + 1)
+      const dodge = Math.round(Math.random() * (100 - 1) + 1)
+
+      console.log(`---Round ${i}---`)
 
       //Rajout de damageToMonster car si il est négatif on a une boucle infini
 
@@ -51,9 +59,13 @@ const fightScript = async (damageToMonster, rdmDamage, damageToUser) => {
         damageToMonster += 38
       }
 
+      if (criticalHit < chanceCritical) {
+        damageToMonster = (newUserStrBr - newMonsterStrgBr + rdmDamage) * 2
+        console.log("Critical hit!")
+      }
+
       monsterStat.hp -= damageToMonster
-      console.log(`---Round ${i}---
-      `)
+
       console.log(`Monster lost : ${damageToMonster}`)
 
       if (monsterStat.hp > 0) {
@@ -63,28 +75,37 @@ const fightScript = async (damageToMonster, rdmDamage, damageToUser) => {
         console.log(`Monster hp : 0
         
           Monster is dead ! You WIN !
+          You won ${xp}XP and ${money} money !
         `)
+        userStat.xp += xp
+        userStat.money += money
 
         break
       }
 
-      userStat.hp -= damageToUser
-      console.log(`User lost : ${damageToUser}`)
+      if (dodge < chanceDodge) {
+        console.log(`You DODGE !
+User lost : 0
+User hp : ${userStat.hp}`)
+      } else {
+        userStat.hp -= damageToUser
+        console.log(`User lost : ${damageToUser}`)
 
-      if (userStat.hp <= 0) {
-        console.log(`User hp : 0
+        if (userStat.hp <= 0) {
+          console.log(`User hp : 0
 
         You are dead ! You LOST`)
 
-        break
-      } else {
-        console.log(`User hp : ${userStat.hp}
+          break
+        } else {
+          console.log(`User hp : ${userStat.hp}
         `)
+        }
       }
 
-      await new Promise((resolve) => setTimeout(resolve, 1000))
+      await new Promise((resolve) => setTimeout(resolve, 500))
     }
   }
 }
 
-export default fightScript
+export { fightScript, beginingFight }

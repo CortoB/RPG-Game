@@ -1,8 +1,14 @@
-import { rl } from "../utils/inputmenu.js"
-
-const save = () => {
-  console.log("saveeee")
-  rl.close()
+import { writeFile } from "node:fs"
+import userInputStartMenu from "../utils/inputstartmenu.js"
+import { userStat } from "../utils/userstat.js"
+const save = async () => {
+  const data = JSON.stringify(userStat)
+  writeFile("userStat.json", data, (err) => {
+    if (err) {
+      throw err
+    }
+  })
+  await userInputStartMenu()
 }
 
 export default save
